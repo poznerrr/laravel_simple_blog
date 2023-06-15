@@ -15,6 +15,20 @@
                 <label for="image">Image</label>
                 <input type="text" class="form-control" name="image" id="image" placeholder="Image">
             </div>
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select class="form-control" name="category_id">
+                    @foreach($categories as $category)
+                        <option value="{{$category->id}}">{{$category->title}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <label for="tags">Tags</label>
+            <select class="form-select" multiple aria-label="multiple select example" id="tags" name="tags[]">
+                @foreach($tags as $tag)
+                    <option value="{{$tag->id}}">{{$tag->title}}</option>
+                @endforeach
+            </select>
             <button type="submit" class="btn btn-primary">Add</button>
         </form>
     </div>

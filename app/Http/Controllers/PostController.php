@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
+use App\Models\PostTag;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -15,12 +18,16 @@ class PostController extends Controller
 
     public function create()
     {
-        return view('post.create');
+        $tags = Tag::all();
+        $categories = Category::all();
+        return view('post.create', compact('categories', 'tags'));
     }
 
     public function edit(Post $post)
     {
-        return view('post.edit', compact('post'));
+        $tags = Tag::all();
+        $categories = Category::all();
+        return view('post.edit', compact('post', 'categories', 'tags'));
     }
 
     public function store()
@@ -29,8 +36,26 @@ class PostController extends Controller
             'title' => 'string',
             'content' => 'string',
             'image' => 'string',
+            'category_id' => '',
+            'tags' => ''
         ]);
-        Post::create($data);
+
+        $tags = $data['tags'];
+        unset($data['tags']);
+
+        $post = Post::create($data);
+
+        // Добавление в pivot через модель
+        /* foreach ($tags as $tag) {
+            PostTag::firstOrCreate([
+                'tag_id' => $tag,
+                'post_id' => $post->id
+            ]);
+        }
+        */
+
+        $post->tags()->attach($tags);
+
         return redirect()->route('post.index');
     }
 
@@ -41,8 +66,18 @@ class PostController extends Controller
             'title' => 'string',
             'content' => 'string',
             'image' => 'string',
+            'category_id' => '',
+            'tags' => '',
         ]);
+
+        $tags = $data['tags'];
+        unset($data['tags']);
+
         $post->update($data);
+        $post->tags()->sync($tags);
+        $post->fresh();
+
+
         return redirect()->route('post.show', $post->id);
     }
 

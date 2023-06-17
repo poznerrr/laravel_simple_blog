@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::group(['namespace'=>'App\Http\Controllers\Post'], function() {
+Route::group(['namespace' => 'App\Http\Controllers\Post'], function () {
     Route::get('/posts', 'IndexController')->name('post.index');
     Route::get('/posts/create', 'CreateController')->name('post.create');
     Route::post('/posts', 'StoreController')->name('post.store');
@@ -22,4 +22,8 @@ Route::group(['namespace'=>'App\Http\Controllers\Post'], function() {
     Route::delete('/posts/{post}', 'DestroyController')->name('post.delete');
 });
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

@@ -32,8 +32,8 @@
                 <select class="form-control" name="category_id">
                     @foreach($categories as $category)
                         <option
-                            {{old('category_id') == $category->id ? 'selected' : ''}}
-                            value="{{$category->id}}">{{$category->title}}</option>
+                                {{old('category_id') == $category->id ? 'selected' : ''}}
+                                value="{{$category->id}}">{{$category->title}}</option>
                     @endforeach
                 </select>
             </div>
@@ -41,7 +41,7 @@
             <select class="form-select" multiple aria-label="multiple select example" id="tags" name="tags[]">
                 @foreach($tags as $tag)
                     <option
-                        value="{{$tag->id}}">{{$tag->title}}</option>
+                            value="{{$tag->id}}">{{$tag->title}}</option>
                 @endforeach
             </select>
             <button type="submit" class="btn btn-primary">Add</button>

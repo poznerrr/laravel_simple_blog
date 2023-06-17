@@ -24,8 +24,8 @@
                 <select class="form-control" name="category_id">
                     @foreach($categories as $category)
                         <option
-                            {{$category->id === $post->category->id ? 'selected' : ''}}
-                            value="{{$category->id}}">{{$category->title}}</option>
+                                {{$category->id === $post->category->id ? 'selected' : ''}}
+                                value="{{$category->id}}">{{$category->title}}</option>
                     @endforeach
                 </select>
             </div>
@@ -34,10 +34,10 @@
                 <select class="form-select" multiple aria-label="multiple select example" id="tags" name="tags[]">
                     @foreach($tags as $tag)
                         <option
-                            @foreach ($post->tags as $postTag)
-                                {{$tag->id === $postTag->id ? 'selected' : ''}}
-                            @endforeach
-                            value="{{$tag->id}}">{{$tag->title}}</option>
+                                @foreach ($post->tags as $postTag)
+                                    {{$tag->id === $postTag->id ? 'selected' : ''}}
+                                @endforeach
+                                value="{{$tag->id}}">{{$tag->title}}</option>
                     @endforeach
                 </select>
             </div>

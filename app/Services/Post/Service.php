@@ -9,7 +9,7 @@ class Service
 {
     public function store(array $data): void
     {
-        $tags = $data['tags'];
+        $tags = $data['tags'] ?? null;
         unset($data['tags']);
 
         $post = Post::create($data);

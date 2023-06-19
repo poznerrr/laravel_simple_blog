@@ -7,7 +7,7 @@ use App\Models\Post;
 
 class Service
 {
-    public function store(array $data): void
+    public function store(array $data)
     {
         $tags = $data['tags'] ?? null;
         unset($data['tags']);
@@ -24,6 +24,8 @@ class Service
         */
 
         $post->tags()->attach($tags);
+
+        return $post;
     }
 
     public function update(Post $post, array $data): void

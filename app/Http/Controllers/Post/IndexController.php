@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Post;
 use App\Http\Controllers\Controller;
 use App\Http\Filters\PostFilter;
 use App\Http\Requests\Post\FilterRequest;
+use App\Http\Resources\Post\PostResource;
 use App\Models\Post;
 
 class IndexController extends BaseController
@@ -16,7 +17,8 @@ class IndexController extends BaseController
         $filter = app()->make(PostFilter::class, ['queryParams' => array_filter($data)]);
         $posts = Post::filter($filter)->get();
 
-        return view('post.index', compact('posts'));
+       return PostResource::collection($posts);
+        // return view('post.index', compact('posts'));
     }
 
 }
